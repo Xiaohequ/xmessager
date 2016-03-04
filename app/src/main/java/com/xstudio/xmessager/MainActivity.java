@@ -1,8 +1,12 @@
 package com.xstudio.xmessager;
 
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +16,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,18 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TextView ipTextView = (TextView) findViewById(R.id.textIp);
+        if(ipTextView != null){
+//            WifiManager wifi = (WifiManager) getSystemService(WIFI_SERVICE);
+//            WifiInfo info = wifi.getConnectionInfo();
+//
+//            int ipInt = info.getIpAddress();
+//            String ipText = Formatter.formatIpAddress(ipInt);
+            ipTextView.setText("Ip adresse: " + Utils.getIPAddress(true));
+        }else{
+            Log.w(TAG, "ip text view = null!");
+        }
     }
 
     @Override
